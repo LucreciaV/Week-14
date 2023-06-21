@@ -1,6 +1,5 @@
-import HomePage from "../pageobjects/homePage"
+import HomePage from "../pageobjects/homePage";
 import inventoryPage from "../pageobjects/inventoryPage";
-
 
     describe("Testing fill inputs empty", () =>{
         it("Username and password fields are empty, should display an error", async() =>{
@@ -39,7 +38,15 @@ describe ("Login to standard user", ()=>{
         await expect(inventoryPage.productsPage).toBeDisplayed();
         await expect(inventoryPage.inventoryItems).toBeDisplayed();
     })
+})
 
-    
-
+describe ("Add items to the cart", () =>{
+    it ("Verify shopping cart process.", async()=>{
+        await HomePage.open()
+        await expect(HomePage.userNameInput).toBeDisplayed();
+        await HomePage.login("standard_user","secret_sauce");
+        await HomePage.loginModalBtnClick();
+        await expect(inventoryPage.inventoryItems).toBeDisplayed();
+        await inventoryPage.addBtnClick();
+    });
 })
